@@ -14,6 +14,7 @@ class SessionsController {
       id: "1",
       username: "Ana Clara",
       password: "123456",
+      role: "customer",
     };
 
     //comparação de usuario e senha
@@ -21,9 +22,12 @@ class SessionsController {
       throw new AppError("Usuário ou senha inválidos", 401);
     }
 
-    //Geração de Token JWT 
+    //Geração de Token JWT, aqui eu também coloco o que o usuário pode fazer 
+    //dentro da aplicação (role), quais são suas autorizações, ou seja, suas permissões.
+    //sub é o assunto, ou seja, o id do usuário. No payload coloco o id, por isso no arquivo
+    //ensureAuthenticated, ele consegue acessar o id do usuário.
     const {secret, expiresIn} = authConfig.jwt;
-    const token = jwt.sign({ id: fakeUser.id }, secret, {
+    const token = jwt.sign({ role:fakeUser.role }, secret, {
       expiresIn,
       subject: String(fakeUser.id),
     });
