@@ -22,6 +22,7 @@ class SessionsController {
       throw new AppError("Usuário ou senha inválidos", 401);
     }
 
+    
     //Geração de Token JWT, aqui eu também coloco o que o usuário pode fazer 
     //dentro da aplicação (role), quais são suas autorizações, ou seja, suas permissões.
     //sub é o assunto, ou seja, o id do usuário. No payload coloco o id, por isso no arquivo
